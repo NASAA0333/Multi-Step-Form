@@ -2,14 +2,23 @@ import { useState } from "react";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
+import Success from "./Success";
 
 const MultiStepForm = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
+    username: "",
     email: "",
+    number: "",
+    password: "",
+    confirmPassword: "",
+    date: "",
+    image: "",
   });
+
+  console.log(formData);
 
   const nextStep = () => {
     setStep((prevStep) => prevStep + 1);
@@ -43,8 +52,11 @@ const MultiStepForm = () => {
           formData={formData}
           setFormData={setFormData}
           prevStep={prevStep}
+          nextStep={nextStep}
         />
       );
+    case 4:
+      return <Success />;
     default:
       return <div>Unknown step</div>;
   }
