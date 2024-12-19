@@ -11,21 +11,24 @@ const Step2 = ({ formData, setFormData, nextStep, prevStep }) => {
     ) {
       return true;
     }
+
     return false;
   };
   const validate = () => {
     const newErrors = {};
-    if (!formData.email.match(/^[a-zA-Z @]+$/)) {
-      newErrors.email = "";
+    if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      newErrors.email = "Please provide a valid email address.";
     }
-    if (!formData.number.match(/^[1234567890]+$/)) {
-      newErrors.number = "";
+
+    if (!formData.number.match(/^[1234567890]{8,14}$/)) {
+      newErrors.number = "Please enter a valid phone number.";
     }
-    if (!formData.password.match(/^[a-zA-Z 1234567890]+$/)) {
-      newErrors.password = "";
+    if (!formData.password.match(/^[a-zA-Z 1234567890 !@#$%^&*()]{8,}$/)) {
     }
-    if (!formData.confirmPassword.match(/^[a-zA-Z 1234567890]+$/)) {
-      newErrors.confirmPassword = "";
+    // a-zA-Z 1234567890 !@#$%^&*() === ^\s@
+    if (formData.confirmPassword !== formData.password) {
+      newErrors.password = "Password must include letters and numbers.";
+      newErrors.confirmPassword = "Passwords do not match. Please try again.";
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;

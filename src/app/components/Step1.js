@@ -15,11 +15,11 @@ const Step1 = ({ formData, setFormData, nextStep }) => {
   };
   const validate = () => {
     const newErrors = {};
-    if (!formData.firstName.match(/^[a-zA-Z]+$/)) {
+    if (!formData.firstName.match(/^[a-zA-Z]{1,}$/)) {
       newErrors.firstName =
         "First name cannot contain special characters or numbers.";
     }
-    if (!formData.lastName.match(/^[a-zA-Z]+$/)) {
+    if (!formData.lastName.match(/^[a-zA-Z]{1,}$/)) {
       newErrors.lastName =
         "Last name cannot contain special characters or numbers.";
     }
