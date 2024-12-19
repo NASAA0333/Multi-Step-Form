@@ -1,17 +1,39 @@
 import Image from "next/image";
+import { useState } from "react";
 
 const Step3 = ({ formData, setFormData, prevStep, nextStep }) => {
-  // const handleSubmit = () => {
-  //   // Add your form submission logic here
-  //   console.log("Form submitted: ", formData);
-  // };
-  const validate = () => {
-    if (formData.date == "" || formData.image == "") {
+  const [imageDrop, setImageDrop] = useState(null);
+  const buttonEnable = () => {
+    if (formData.date == "" || formData.image !== "") {
       return true;
     }
     return false;
   };
+  const handleDrop = (event) => {
+    const file = event.target.files[0];
+    const previewImage = URL.createObjectURL(file);
+    setImageDrop(previewImage);
+  };
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.date.match(/^[a-zA-Z]+$/)) {
+      newErrors.date =
+        "First name cannot contain special characters or numbers.";
+    }
+    if (!formData.lastName.match(/^[a-zA-Z]{1,}$/)) {
+      newErrors.lastName =
+        "Last name cannot contain special characters or numbers.";
+    }
 
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const next = () => {
+    if (validate()) {
+      nextStep(formData);
+    }
+  };
   return (
     <div className="w-[480px] h-[655px] rounded-[8px] bg-[#ffffff]  flex flex-col justify-around items-center">
       <div className="w-[416px] h-[385px] gap-[28px] ">
@@ -26,12 +48,28 @@ const Step3 = ({ formData, setFormData, prevStep, nextStep }) => {
           onChange={(e) => setFormData({ ...formData, date: e.target.value })}
         />
         <h2>{"Profile image *"}</h2>
-        <input
-          className="w-[416px] h-[180px] rounded-[8px] p-[8px] bg-[#CBD5E1]"
-          type="file"
-          value={formData.image}
-          onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-        />
+        <label
+          htmlFor="proFileImage"
+          className="rounded-[8px]  w-[416px] h-[180px] bg-slate-400 block"
+        >
+          <input
+            className="hidden w-full h-full"
+            type="file"
+            id="proFileImage"
+            value={formData.image}
+            onChange={handleDrop}
+          />
+          {imageDrop ? (
+            <img src={imageDrop} className="w-full h-full rounded-[8px]" />
+          ) : (
+            <input
+              className="hidden w-full h-full"
+              type="file"
+              id="proFileImage"
+              value={formData.image}
+            />
+          )}
+        </label>
       </div>
       <div className="w-[416px] h-[44px] flex justify-between ">
         <button
@@ -41,13 +79,13 @@ const Step3 = ({ formData, setFormData, prevStep, nextStep }) => {
           {"< Back"}
         </button>
         <button
-          disabled={validate()}
+          disabled={buttonEnable()}
           onClick={nextStep}
           className={`w-[416px] h-[44px]  ${
-            validate() === true ? "bg-[#D6D8DB]" : "bg-[black]"
+            buttonEnable() === true ? "bg-[#D6D8DB]" : "bg-[black]"
           } rounded-[6px] text-white`}
         >
-          {"Continue 3/3 >"}
+          {"Submit 3/3 >"}
         </button>
       </div>
     </div>
