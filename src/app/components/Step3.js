@@ -3,55 +3,65 @@ import { useState } from "react";
 
 const Step3 = ({ formData, setFormData, prevStep, nextStep }) => {
   const [imageDrop, setImageDrop] = useState(null);
+
   const buttonEnable = () => {
-    if (formData.date == "" || formData.image !== "") {
+    if (formData.date === "" || formData.image === "") {
       return true;
     }
     return false;
   };
   const handleDrop = (event) => {
-    const file = event.target.files[0];
-    const previewImage = URL.createObjectURL(file);
-    setImageDrop(previewImage);
-  };
-  const validate = () => {
-    const newErrors = {};
-    if (!formData.date.match(/^[a-zA-Z]+$/)) {
-      newErrors.date =
-        "First name cannot contain special characters or numbers.";
-    }
-    if (!formData.lastName.match(/^[a-zA-Z]{1,}$/)) {
-      newErrors.lastName =
-        "Last name cannot contain special characters or numbers.";
-    }
+    if (event.target.files) {
+      const file = event.target.files[0];
+      const previewImage = URL.createObjectURL(file);
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const next = () => {
-    if (validate()) {
-      nextStep(formData);
+      console.log(typeof previewImage);
+      setImageDrop(previewImage);
+      setFormData(previewImage);
     }
   };
+  // const [errors, setErrors] = useState({});
+  // const validate = () => {
+  //   const newErrors = {};
+  //   if (!formData.date === "") {
+  //     newErrors.date = "yeee.";
+  //   }
+  //   if (formData.image !== formData.image) {
+  //     newErrors.image = "arai shvv.";
+  //   }
+
+  //   setErrors(newErrors);
+  //   return Object.keys(newErrors).length === 0;
+  // };
+
+  // const next = () => {
+  //   if (validate()) {
+  //     nextStep(formData);
+  //   }
+  // };
   return (
     <div className="w-[480px] h-[655px] rounded-[8px] bg-[#ffffff]  flex flex-col justify-around items-center">
       <div className="w-[416px] h-[385px] gap-[28px] ">
         <Image src={"/Main 1.png"} alt="" width={60} height={60} />
-        <h1 className="">Join Us! 😎</h1>
-        <h1>Please provide all current information accurately.</h1>{" "}
-        <h2>{"Date of birth *"}</h2>
+        <h1 className="text-[#202124] text-[26px] font-bold">Join Us! 😎</h1>
+        <h1 className="text-[#8E8E8E] text-[18px]">
+          Please provide all current information accurately.
+        </h1>
+        <h2>Date of birth *</h2>
         <input
           className="w-[416px] h-[44px] rounded-[8px] p-[8px] bg-[#CBD5E1]"
           type="date"
           value={formData.date}
           onChange={(e) => setFormData({ ...formData, date: e.target.value })}
         />
-        <h2>{"Profile image *"}</h2>
+        {/* {errors.date && <p className="text-red-500 text-sm">{errors.date}</p>} */}
+        <h2>Profile image *</h2>
         <label
           htmlFor="proFileImage"
-          className="rounded-[8px]  w-[416px] h-[180px] bg-slate-400 block"
+          className="rounded-[8px]  w-[416px] h-[180px] bg-[#7F7F800D] flex justify-center items-center flex-col"
         >
+          {/* <Image src={"/Addimage.png"} alt="" width={28} height={28} />
+          <h3 className="font-bold ">Add image</h3> */}
           <input
             className="hidden w-full h-full"
             type="file"
@@ -67,9 +77,11 @@ const Step3 = ({ formData, setFormData, prevStep, nextStep }) => {
               type="file"
               id="proFileImage"
               value={formData.image}
+              onChange={handleDrop}
             />
           )}
         </label>
+        {/* {errors.image && <p className="text-red-500 text-sm">{errors.image}</p>} */}
       </div>
       <div className="w-[416px] h-[44px] flex justify-between ">
         <button

@@ -42,9 +42,11 @@ const Step1 = ({ formData, setFormData, nextStep }) => {
     <div className="w-[480px] h-[655px] rounded-[8px] bg-[#ffffff]  flex flex-col justify-around items-center">
       <div className="w-[416px] h-[385px] gap-[28px] ">
         <Image src={"/Main 1.png"} alt="" width={60} height={60} />
-        <h1 className="">Join Us! 😎</h1>
-        <h1>Please provide all current information accurately.</h1>
-        <h2>{"First name *"} </h2>
+        <h1 className="text-[#202124] text-[26px] font-bold">Join Us! 😎</h1>
+        <h1 className="text-[#8E8E8E] text-[18px]">
+          {"Please provide all current information accurately."}
+        </h1>
+        <h2>First name *</h2>
         <input
           className="w-[416px] h-[44px] rounded-[8px] p-[8px] bg-[#CBD5E1]"
           type="text"
@@ -57,7 +59,7 @@ const Step1 = ({ formData, setFormData, nextStep }) => {
         {errors.firstName && (
           <p className="text-red-500 text-sm">{errors.firstName}</p>
         )}
-        <h2>{"Last name *"} </h2>
+        <h2>Last name * </h2>
         <input
           className="w-[416px] h-[44px] rounded-[8px] p-[8px] bg-[#CBD5E1]"
           type="text"
@@ -70,7 +72,7 @@ const Step1 = ({ formData, setFormData, nextStep }) => {
         {errors.lastName && (
           <p className="text-red-500 text-sm">{errors.lastName}</p>
         )}
-        <h2>{"Username *"} </h2>
+        <h2>Username * </h2>
         <input
           className="w-[416px] h-[44px] rounded-[8px] p-[8px] bg-[#CBD5E1]"
           type="email"

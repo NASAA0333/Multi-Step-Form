@@ -23,7 +23,8 @@ const Step2 = ({ formData, setFormData, nextStep, prevStep }) => {
     if (!formData.number.match(/^[1234567890]{8,14}$/)) {
       newErrors.number = "Please enter a valid phone number.";
     }
-    if (!formData.password.match(/^[a-zA-Z 1234567890 !@#$%^&*()]{8,}$/)) {
+    if (!formData.password.match(/^[^\s@]{8,}$/)) {
+      newErrors.password = "Password must include letters and numbers.";
     }
     // a-zA-Z 1234567890 !@#$%^&*() === ^\s@
     if (formData.confirmPassword !== formData.password) {
@@ -43,9 +44,11 @@ const Step2 = ({ formData, setFormData, nextStep, prevStep }) => {
     <div className="w-[480px] h-[655px] rounded-[8px] bg-[#ffffff]  flex flex-col justify-around items-center">
       <div className="w-[416px] h-[385px] gap-[28px] ">
         <Image src={"/Main 1.png"} alt="" width={60} height={60} />
-        <h1 className="">Join Us! 😎</h1>
-        <h1>Please provide all current information accurately.</h1>{" "}
-        <h2>{"Email *"} </h2>
+        <h1 className="text-[#202124] text-[26px] font-bold">Join Us! 😎</h1>
+        <h1 className="text-[#8E8E8E] text-[18px]">
+          Please provide all current information accurately.
+        </h1>
+        <h2>Email *</h2>
         <input
           className="w-[416px] h-[44px] rounded-[8px] p-[8px] bg-[#CBD5E1]"
           type="Email"
@@ -65,7 +68,7 @@ const Step2 = ({ formData, setFormData, nextStep, prevStep }) => {
         {errors.number && (
           <p className="text-red-500 text-sm">{errors.number}</p>
         )}
-        <h2>{"Password *"} </h2>
+        <h2>Password * </h2>
         <input
           className="w-[416px] h-[44px] rounded-[8px] p-[8px] bg-[#CBD5E1]"
           type="Password"
@@ -78,7 +81,7 @@ const Step2 = ({ formData, setFormData, nextStep, prevStep }) => {
         {errors.password && (
           <p className="text-red-500 text-sm">{errors.password}</p>
         )}
-        <h2>{" Confirm Password *"} </h2>
+        <h2> Confirm Password *</h2>
         <input
           className="w-[416px] h-[44px] rounded-[8px] p-[8px] bg-[#CBD5E1]"
           type="Password"
