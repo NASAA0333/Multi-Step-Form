@@ -20,25 +20,7 @@ const Step3 = ({ formData, setFormData, prevStep, nextStep }) => {
       setFormData(previewImage);
     }
   };
-  // const [errors, setErrors] = useState({});
-  // const validate = () => {
-  //   const newErrors = {};
-  //   if (!formData.date === "") {
-  //     newErrors.date = "yeee.";
-  //   }
-  //   if (formData.image !== formData.image) {
-  //     newErrors.image = "arai shvv.";
-  //   }
 
-  //   setErrors(newErrors);
-  //   return Object.keys(newErrors).length === 0;
-  // };
-
-  // const next = () => {
-  //   if (validate()) {
-  //     nextStep(formData);
-  //   }
-  // };
   return (
     <div className="w-[480px] h-[655px] rounded-[8px] bg-[#ffffff]  flex flex-col justify-around items-center">
       <div className="w-[416px] h-[385px] gap-[28px] ">
@@ -54,14 +36,12 @@ const Step3 = ({ formData, setFormData, prevStep, nextStep }) => {
           value={formData.date}
           onChange={(e) => setFormData({ ...formData, date: e.target.value })}
         />
-        {/* {errors.date && <p className="text-red-500 text-sm">{errors.date}</p>} */}
+
         <h2>Profile image *</h2>
         <label
           htmlFor="proFileImage"
           className="rounded-[8px]  w-[416px] h-[180px] bg-[#7F7F800D] flex justify-center items-center flex-col"
         >
-          {/* <Image src={"/Addimage.png"} alt="" width={28} height={28} />
-          <h3 className="font-bold ">Add image</h3> */}
           <input
             className="hidden w-full h-full"
             type="file"
@@ -81,7 +61,6 @@ const Step3 = ({ formData, setFormData, prevStep, nextStep }) => {
             />
           )}
         </label>
-        {/* {errors.image && <p className="text-red-500 text-sm">{errors.image}</p>} */}
       </div>
       <div className="w-[416px] h-[44px] flex justify-between ">
         <button

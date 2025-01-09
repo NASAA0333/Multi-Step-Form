@@ -26,7 +26,7 @@ const Step2 = ({ formData, setFormData, nextStep, prevStep }) => {
     if (!formData.password.match(/^[^\s@]{8,}$/)) {
       newErrors.password = "Password must include letters and numbers.";
     }
-    // a-zA-Z 1234567890 !@#$%^&*() === ^\s@
+
     if (formData.confirmPassword !== formData.password) {
       newErrors.password = "Password must include letters and numbers.";
       newErrors.confirmPassword = "Passwords do not match. Please try again.";
