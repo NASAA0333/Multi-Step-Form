@@ -17,8 +17,9 @@ const MultiStepForm = () => {
     date: "",
     image: "",
   });
-  const onChange = (e) => {};
-  console.log(formData);
+  const onChange = (e) => {
+    1;
+  };
 
   const nextStep = () => {
     setStep((prevStep) => prevStep + 1);

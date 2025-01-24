@@ -15,7 +15,6 @@ const Step3 = ({ formData, setFormData, prevStep, nextStep }) => {
       const file = event.target.files[0];
       const previewImage = URL.createObjectURL(file);
 
-      console.log(typeof previewImage);
       setImageDrop(previewImage);
       setFormData(previewImage);
     }
